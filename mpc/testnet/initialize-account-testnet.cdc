@@ -49,7 +49,11 @@ transaction {
     if collector.borrow<&MetaPandaAirdropNFT.Collection>(from: MetaPandaAirdropNFT.CollectionStoragePath) == nil {
       let collection <-MetaPandaAirdropNFT.createEmptyCollection()
       collector.save(<-collection, to: MetaPandaAirdropNFT.CollectionStoragePath)
-      collector.link<&{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection, AnchainUtils.ResolverCollection}>(
+      collector.link<&{
+        NonFungibleToken.CollectionPublic, 
+        MetadataViews.ResolverCollection, 
+        AnchainUtils.ResolverCollection
+      }>(
         MetaPandaAirdropNFT.CollectionPublicPath,
         target: MetaPandaAirdropNFT.CollectionStoragePath
       )
