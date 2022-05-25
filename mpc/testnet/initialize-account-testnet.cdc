@@ -46,10 +46,10 @@ transaction {
     }
     
     // Install a MetaPandaAirdropNFT collection
-    if signer.borrow<&MetaPandaAirdropNFT.Collection{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection, AnchainUtils.ResolverCollection}>(from: MetaPandaAirdropNFT.CollectionStoragePath) == nil {
+    if collector.borrow<&MetaPandaAirdropNFT.Collection>(from: MetaPandaAirdropNFT.CollectionStoragePath) == nil {
       let collection <-MetaPandaAirdropNFT.createEmptyCollection()
-      signer.save(<-collection, to: MetaPandaAirdropNFT.CollectionStoragePath)
-      signer.link<&MetaPandaAirdropNFT.Collection{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection, AnchainUtils.ResolverCollection}>(
+      collector.save(<-collection, to: MetaPandaAirdropNFT.CollectionStoragePath)
+      collector.link<&{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection, AnchainUtils.ResolverCollection}>(
         MetaPandaAirdropNFT.CollectionPublicPath,
         target: MetaPandaAirdropNFT.CollectionStoragePath
       )
